@@ -1,0 +1,27 @@
+# Updated August 12, 2012
+
+ServerSignature Off
+IndexIgnore *
+Options All -Indexes
+
+DirectoryIndex index.php
+
+#<Files *>
+#order deny,allow
+
+<Files "config.php">
+Order Allow,Deny
+Deny from All
+</Files>
+
+<Files "common.php">
+Order Allow,Deny
+Deny from All
+</Files>
+
+# This prevents web browsers or spiders from seeing your .htaccess directives:
+<Files .htaccess>
+deny from all
+</Files>
+
+# End of file

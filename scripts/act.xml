@@ -1,0 +1,9 @@
+<ted500ActivationResponse>
+ <PostServer>192.168.0.1</PostServer>
+ <PostURL>/elec/scripts/postData.php</PostURL>
+ <UseSSL>F</UseSSL>
+ <PostPort>80</PostPort>
+ <AuthToken>myToken</AuthToken>
+ <PostRate>1</PostRate>
+ <SSLKey>NOT IMPLEMENTED</SSLKey>
+</ted500ActivationResponse>
