@@ -2,6 +2,33 @@
 require_once 'config.php';
 require_once 'lib/e_lib.php';
 
+// Future logging method
+function logIt( $msg )
+{
+   echo $msg . "\n";
+}
+
+// Future logging method
+function doError( $msg )
+{
+   echo $msg . "\n";
+   file_put_contents( 'php://stderr', $msg . "\n" );
+}
+
+
+// Common code that should run for EVERY page follows here
+
+global $timezone;
+
+// Set timezone for all PHP functions
+date_default_timezone_set( $timezone );
+
+// Always connect to the database, don't wait for a request to connect
+$pdo = new PDO( $dbConfig['dsn'], $dbConfig['username'], $dbConfig['password'] );
+$pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+$pdo->exec( "SET time_zone = '$timezone'" );	// Set timezone for all MySQL functions
+
+
 function bobby_tables()
 {
   $filename = './images/exploits_of_a_mom.png';
@@ -11,36 +38,6 @@ function bobby_tables()
   echo $contents;
 }
 
-function connect_to_db()
-{
-  // Using the keyword global really points out that this might be a bad idea.  Should these be buried in a class for safety?
-  global $host;
-  global $user;
-  global $pass;
-  global $db;
-  global $link;
-
-  // Only open a new connection if it's not already open
-  if( !isset( $link ) )
-  {
-    // Using 'p:' tells the DB that I want a persistent connection - so that I'm not constantly opening and closing connections
-    $link = new mysqli( 'p:'.$host, $user, $pass, $db );
-    if( $link->connect_error )
-    {
-      die( 'Could not connect: <no error message provided to hackers>'  );
-    }
-
-    global $timezone;
-    mysqli_query( $link, 'SET time_zone = "$timezone"' );
-  }
-}
-
-function disconnect_from_db()
-{
-  global $link;
-  $link->close();
-  unset( $link );
-}
 
 function validate_date( $some_date )
 {
