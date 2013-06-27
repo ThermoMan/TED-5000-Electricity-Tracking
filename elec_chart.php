@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv=Content-Type content='text/html; charset=utf-8'>
 		<title>Chart</title>
-    	<script type='text/javascript' src='lib/dygraph-combined.js'></script> <!-- Add charting library -->
+    	<script type='text/javascript' src='/common/dygraph-combined.js'></script> <!-- Add charting library -->
 	</head>
 	<body>
 <?php
